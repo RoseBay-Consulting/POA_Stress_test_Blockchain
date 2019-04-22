@@ -1,0 +1,9 @@
+node index.js 1
+1 = 1tps
+
+
+Index.js is main file
+
+bash.sh run nodesjs
+
+bashmultiple.sh run bash.sh in loop with 

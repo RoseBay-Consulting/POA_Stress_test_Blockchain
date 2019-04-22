@@ -1,0 +1,4 @@
+/node_modules
+/outputs
+.node-xmlhttprequest**
+package-lock.json
