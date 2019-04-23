@@ -5,33 +5,33 @@ const config = require('../config/config')
 
 
 module.exports = {
-    saveInput: (result,tps) => {
-        const file = `${__dirname}/../data/${tps}tps_web3input.csv`
+    saveInput: (fileName, result) => {
+        const file = `${__dirname}/../data/${fileName}.csv`
+
+        kyz = Object.keys(result);
+
+
         if (!fs.existsSync(file) && result)
             writer1 = csvWriter({
-                headers: ["number","timestamp1", "timestamp2"]
+                headers: kyz
             });
         else
             writer1 = csvWriter({
                 sendHeaders: false
             });
-        const writeData = {
-            number: result.number,
-            timestamp1 : result.timestamp1,
-            timestamp2: result.timestamp2
-        }
+
         writer1.pipe(fs.createWriteStream(file, {
             flags: 'a'
         }))
-        writer1.write(writeData)
+        writer1.write(result)
         writer1.end()
 
     },
-    saveLogs: (result,tps) => {
+    saveLogs: (result, tps) => {
         const file = `${__dirname}/../data/${tps}tps_web3output.csv`
         if (!fs.existsSync(file) && result)
             writer = csvWriter({
-                headers: ["lognumber","logtimestamp1", "logtimestamp2"]
+                headers: ["lognumber", "logtimestamp1", "logtimestamp2"]
             });
         else
             writer = csvWriter({
@@ -39,7 +39,7 @@ module.exports = {
             });
         const writeData = {
             lognumber: result.lognumber,
-            logtimestamp1 : result.logtimestamp1,
+            logtimestamp1: result.logtimestamp1,
             logtimestamp2: result.logtimestamp2
         }
         writer.pipe(fs.createWriteStream(file, {
@@ -103,8 +103,8 @@ module.exports = {
         return new Date().getTime();
 
     },
-    increment : (i) => {
-        return i+1;
+    increment: (i) => {
+        return i + 1;
     },
 
 
